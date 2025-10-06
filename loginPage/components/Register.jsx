@@ -9,7 +9,9 @@ import {
   CardBody,
   CardHeader,
   FormFeedback,
+  CardFooter,
 } from "reactstrap";
+import axios from "axios";
 export default function Register() {
   const initialValues = {
     ad: "",
@@ -17,7 +19,7 @@ export default function Register() {
     email: "",
     Sifre: "",
   };
-
+  const apiKey = "reqres-free-v1";
   const errorMessages = {
     ad: "Adinizi en az 3 karakter giriniz",
     soyad: "Soyadi en az 3 karakter giriniz",
@@ -35,6 +37,7 @@ export default function Register() {
   });
 
   const [isValid, setIsValid] = useState(false);
+  const [id, setId] = useState("");
 
   const validateEmail = (email) => {
     return String(email)
@@ -88,6 +91,19 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isValid) return;
+
+    axios.post("https://reqres.in/api/users", formData, {
+      headers: {
+        "x-api-key": apiKey
+      }
+    })
+      .then(response => {
+        console.log(response);
+        setId(response.data.id);
+      })
+      .catch(error => console.warn(error));
+        
+      
   };
 
     return (
@@ -149,7 +165,10 @@ export default function Register() {
             {errors.Sifre && <FormFeedback>{errorMessages.Sifre}</FormFeedback>}
             <Button disabled={!isValid}>Kayit Ol</Button>
           </Form>
+          
         </CardBody>
+        <CardFooter>ID: {id} 
+            </CardFooter>
       </Card>
     );
   }
