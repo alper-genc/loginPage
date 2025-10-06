@@ -78,7 +78,7 @@ describe('register page', () => {
         cy.get('[data-cy="password-input"]').type("123456Aa*");
         cy.get('[data-cy="submit-button"]').click();
         //Assert
-        cy.get('[data-cy="response-message"]')
+        cy.get('[data-cy="response-message"]').should('be.visible');
         });
       
     });
