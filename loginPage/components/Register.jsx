@@ -12,6 +12,15 @@ import {
   CardFooter,
 } from "reactstrap";
 import axios from "axios";
+
+export const errorMessages = {
+    ad: "Adinizi en az 3 karakter giriniz",
+    soyad: "Soyadi en az 3 karakter giriniz",
+    email: "Emailinizi giriniz",
+    Sifre:
+      "En az 8 karakter, bir büyük harf, bir küçük harf, bir sembol ve bir rakam içermelidir",
+  };
+
 export default function Register() {
   const initialValues = {
     ad: "",
@@ -20,13 +29,6 @@ export default function Register() {
     Sifre: "",
   };
   const apiKey = "reqres-free-v1";
-  const errorMessages = {
-    ad: "Adinizi en az 3 karakter giriniz",
-    soyad: "Soyadi en az 3 karakter giriniz",
-    email: "Emailinizi giriniz",
-    Sifre:
-      "En az 8 karakter, bir büyük harf, bir küçük harf, bir sembol ve bir rakam içermelidir",
-  };
 
   const [formData, setFormData] = useState(initialValues);
   const [errors, setErrors] = useState({
@@ -121,9 +123,10 @@ export default function Register() {
                 onChange={handleChange}
                 value={formData.ad}
                 invalid={errors.ad}
+                data-cy="ad-input"
               />
             </FormGroup>
-            {errors.ad && <FormFeedback>{errorMessages.ad}</FormFeedback>}
+            {errors.ad && <FormFeedback data-cy="error-message">{errorMessages.ad}</FormFeedback>}
             <FormGroup>
               <Label for="soyad">Soyad</Label>
               <Input
@@ -134,9 +137,10 @@ export default function Register() {
                 onChange={handleChange}
                 value={formData.soyad}
                 invalid={errors.soyad}
+                data-cy="soyad-input"
               />
             </FormGroup>
-            {errors.soyad && <FormFeedback>{errorMessages.soyad}</FormFeedback>}
+            {errors.soyad && <FormFeedback data-cy="error-message">{errorMessages.soyad}</FormFeedback>}
             <FormGroup>
               <Label for="email">Email</Label>
               <Input
@@ -147,9 +151,10 @@ export default function Register() {
                 onChange={handleChange}
                 value={formData.email}
                 invalid={errors.email}
+                data-cy="email-input"
               />
             </FormGroup>
-            {errors.email && <FormFeedback>{errorMessages.email}</FormFeedback>}
+            {errors.email && <FormFeedback data-cy="error-message">{errorMessages.email}</FormFeedback>}
             <FormGroup>
               <Label for="Sifre">Sifre</Label>
               <Input
@@ -160,10 +165,11 @@ export default function Register() {
                 onChange={handleChange}
                 value={formData.Sifre}
                 invalid={errors.Sifre}
+                data-cy="password-input"
               />
             </FormGroup>
-            {errors.Sifre && <FormFeedback>{errorMessages.Sifre}</FormFeedback>}
-            <Button disabled={!isValid}>Kayit Ol</Button>
+            {errors.Sifre && <FormFeedback data-cy="error-message">{errorMessages.Sifre}</FormFeedback>}
+            <Button data-cy="submit-button" disabled={!isValid}>Kayit Ol</Button>
           </Form>
           
         </CardBody>
