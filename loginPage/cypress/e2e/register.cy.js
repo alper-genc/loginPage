@@ -68,7 +68,18 @@ describe('register page', () => {
       cy.get('[data-cy="submit-button"]').should("not.be.disabled");
       });
 
-        
+      it('submits form on validated inputs', () => {
+        //Arrange
+        //cy.visit('http://localhost:5174/')
+        //Act
+        cy.get('[data-cy="ad-input"]').type("Alper");
+        cy.get('[data-cy="soyad-input"]').type("Genc");
+        cy.get('[data-cy="email-input"]').type("alpergenc@gmail.com");
+        cy.get('[data-cy="password-input"]').type("123456Aa*");
+        cy.get('[data-cy="submit-button"]').click();
+        //Assert
+        cy.get('[data-cy="response-message"]')
+        });
       
     });
 });
